@@ -1,0 +1,128 @@
+<!--1 sq meter = 10.7641 sq feet
+1 perche = 42.21 sq meter
+1 toise = 3.80 sq meter
+1 arpent = 100 perches
+1 perche = 11.11 toises
+1 arpent = 1111 toises-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Land • Measurement Units conversion</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style>
+    .box{
+      margin-top: 3%;
+      margin-left: 30%;
+      width: 400px;
+      border: 1px solid;
+      padding: 15px;
+    }
+
+    .box button{
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .content{
+      margin-bottom: 18px;
+    }
+
+    .content input{
+      width: 30%;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .content select{
+      font-size: 20px;
+    }
+
+  </style>
+  <script>
+    function conversion(input){
+      var value1 = $('#1st_input').val();
+      var unit1 = $('#1st_unit').val();
+
+      var value2 = $('#2nd_input').val();
+      var unit2 = $('#2nd_unit').val();
+
+      //arpent, perche, toise, sq_meter, sq_foot.
+      var units = [1, 100, 1111, 4221.8, 45443.87738];
+
+      if(input == 1)
+      {
+        value2 = value1 * (units[unit2] / units[unit1]);
+        $('#2nd_input').val(value2);
+      }
+      else {
+        value1 = value2 * (units[unit1] / units[unit2]);
+        $('#1st_input').val(value1);
+      }
+
+
+      //$('#test').html(value2);
+    }
+
+
+    $(document).ready(function(){
+      conversion(1);
+      $('#submit').click(function(){conversion(1);});
+      $('#1st_input').change(function(){conversion(1);});
+      $('#2nd_input').change(function(){conversion(2);});
+      $('#1st_unit').change(function(){conversion(1);});
+      $('#2nd_unit').change(function(){conversion(1);});
+
+      $('#reset').click(function(){
+        $('#1st_input').val(1);
+        conversion(1);
+      });
+
+    });
+
+
+  </script>
+</head>
+<body>
+  <div class='box'>
+    <p id='test'></p>
+    <h2>Land Measurement units converter</h2>
+    <hr>
+    <br/>
+      <div class='content'>
+        <input type="number" name="1st" min='1' id='1st_input' value="1">
+        <select name="unit" id='1st_unit'>
+          <option value='3'>sq meter</option>
+          <option value='4'>sq foot</option>
+          <option value='1' selected>perche</option>
+          <option value='2'>toise</option>
+          <option value='0'>arpent</option>
+        </select>
+      </div>
+      <p>to</p>
+      <div class='content'>
+        <input type="number" name="2nd" min='1' id='2nd_input'>
+        <select name="unit" id='2nd_unit'>
+          <option value='3' selected>sq meter</option>
+          <option value='4'>sq foot</option>
+          <option value='1'>perche</option>
+          <option value='2'>toise</option>
+          <option value='0'>arpent</option>
+        </select>
+      </div>
+      <br/>
+      <button id='submit'>convert</button>
+      <button id='reset'>reset</button>
+    <br/><br/>
+    <hr>
+    <div>
+      <i>1 sq meter = 10.7641 sq feet</i><br/>
+      <i>1 perche = 42.21 sq meter</i><br/>
+      <i>1 toise = 3.80 sq meter</i><br/>
+      <i>1 arpent = 100 perches</i><br/>
+      <i>1 perche = 11.11 toises</i><br/>
+      <i>1 arpent = 1111 toises</i><br/>
+    </div>
+  </div>
+</body>
+</html>
